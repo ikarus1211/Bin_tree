@@ -1,5 +1,28 @@
+/*
+ * AVL Binary tree
+ * Program that was made for university
+ * assignment from Data Structures and Algorithms
+ * This program takes numbers and stors them
+ * in Bin Tree
+ *
+ * It implements addition and search function
+ * It works on basic principles of AVL Tree
+ */
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
+
+
+/*
+ * One basic node of the tree.
+ *
+ * left, right pointer - represents left and right child of the node
+ * data - it's used for storing data(integers)
+ * height - this value stores height level of the node
+ */
+
 
 typedef struct node
 {
@@ -10,6 +33,10 @@ typedef struct node
 } NODE;
 
 
+/*
+ * Right rotation of nodes
+ */
+
 NODE* Right(NODE *ptr)
 {
     NODE *temp = ptr->left;
@@ -18,6 +45,11 @@ NODE* Right(NODE *ptr)
     ptr = temp;
     return ptr;
 }
+
+/*
+ * Left right rotation
+ */
+
 NODE *LeftRight(NODE *ptr)
 {
     NODE *temp = ptr->left;
@@ -26,6 +58,11 @@ NODE *LeftRight(NODE *ptr)
     ptr->left->left = temp;
     return Right(ptr);
 }
+
+/*
+ * Left rotation
+ */
+
 NODE* Left(NODE *ptr)
 {
     NODE *temp = ptr->right;
@@ -34,6 +71,11 @@ NODE* Left(NODE *ptr)
     ptr = temp;
     return ptr;
 }
+
+/*
+ * Right Left rotation
+ */
+
 NODE* RightLeft(NODE *ptr)
 {
     NODE *temp = ptr->right;
@@ -42,6 +84,11 @@ NODE* RightLeft(NODE *ptr)
     ptr->right->right =temp;
     return Left(ptr);
 }
+
+/*
+ * The two function below are for initializing rotations
+ */
+
 NODE *InitLeft(NODE *ptr)
 {
     if (ptr->left->right == NULL || ptr->left->right->height < ptr->left->left->height)
@@ -57,6 +104,10 @@ NODE* InitRight(NODE *ptr)
         return RightLeft(ptr);
 
 }
+
+/*
+ * This is for calculating and rewriting depth
+ */
 
 int checkDepth(NODE *ptr)
 {
@@ -83,6 +134,14 @@ int checkDepth(NODE *ptr)
 
 
 }
+
+/*
+ * Function that search tree for the given number
+ * Arguments of functions are:
+ * - base node of tree
+ * - value to be searched
+ */
+
 int search(NODE *ptr, int value)
 {
     if (ptr == NULL)
